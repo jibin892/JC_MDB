@@ -3,8 +3,8 @@ package com.example.jc_mdb.service;
 import android.content.Context;
 import android.widget.Toast;
 
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
+
 
 import com.example.jc_mdb.adapter.MoviesAdapter;
 import com.example.jc_mdb.config.BuildConfigs;
@@ -43,8 +43,6 @@ public class FetchMoreDataService {
         this.context = context;
         this.moviesAdapter = moviesAdapter;
     }
-
-
 
     public void loadMore(int a, final int pages) {
         final TMDbService TMDbService = RetrofitInstance.getTMDbService(context);
@@ -107,13 +105,13 @@ public class FetchMoreDataService {
                                         totalPagesGenre = discoversList.getTotalPages();
                                         recyclerView.setAdapter(moviesAdapter);
                                     } else {
-                                        ArrayList<Discover> discovers = (ArrayList<Discover>) discoversList.getResults();
-                                        DiscoverToMovie discoverToMovie = new DiscoverToMovie(discovers);
-                                        ArrayList<com.example.jc_mdb.model.yts.Movie> movies = discoverToMovie.getMovies();
-                                        for (com.example.jc_mdb.model.yts.Movie movie : movies) {
-                                         //   movieList.add(movies);
-                                            moviesAdapter.notifyItemInserted(movieList.size() - 1);
-                                        }
+//                                        ArrayList<Discover> discovers = (ArrayList<Discover>) discoversList.getResults();
+//                                        DiscoverToMovie discoverToMovie = new DiscoverToMovie(discovers);
+//                                        ArrayList<Movie> movies = discoverToMovie.getMovies();
+//                                        for (Movie movie : movies) {
+//                                            movieList.add(movie);
+//                                            moviesAdapter.notifyItemInserted(movieList.size() - 1);
+//                                        }
                                     }
                                 }
                             }

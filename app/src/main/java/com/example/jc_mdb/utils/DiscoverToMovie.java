@@ -1,7 +1,8 @@
 package com.example.jc_mdb.utils;
 
 import com.example.jc_mdb.model.tmdb.Discover;
-import com.example.jc_mdb.model.yts.Movie;
+import com.example.jc_mdb.model.tmdb.Movie;
+
 
 import java.util.ArrayList;
 

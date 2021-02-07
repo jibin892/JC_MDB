@@ -14,7 +14,7 @@ import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-  import com.example.jc_mdb.model.yts.Torrent;
+import com.example.jc_mdb.model.yts.Torrent;
 import com.example.jc_mdb.service.TorrentFetcherService;
 import com.sg.moviesindex.R;
 import com.sg.moviesindex.databinding.TorrentListItemsLayoutBinding;
@@ -53,8 +53,8 @@ public class TorrentsListItemAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof TorrentListItemViewHolder) {
-        Torrent torrent = torrentList.get(position);
-        //    ((TorrentListItemViewHolder) holder).torrentListItemsLayoutBinding.setTorrent(torrent);
+            Torrent torrent = torrentList.get(position);
+            ((TorrentListItemViewHolder) holder).torrentListItemsLayoutBinding.setTorrent(torrent);
         }
     }
 
@@ -77,7 +77,7 @@ public class TorrentsListItemAdapter extends RecyclerView.Adapter<RecyclerView.V
             torrentListItemsLayoutBinding.ivDownloadButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //TorrentFetcherService.resultantTorrent = torrentListItemsLayoutBinding.getTorrent();
+                    TorrentFetcherService.resultantTorrent = torrentListItemsLayoutBinding.getTorrent();
                     completeListener.onComplete(false);
                     button.revertAnimation();
                     button.stopAnimation();

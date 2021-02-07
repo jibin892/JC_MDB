@@ -17,10 +17,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
- import com.example.jc_mdb.fragments.FavouriteMovies;
+import com.example.jc_mdb.fragments.FavouriteMovies;
 import com.example.jc_mdb.model.tmdb.Discover;
 import com.example.jc_mdb.model.tmdb.Genre;
-import com.example.jc_mdb.model.yts.Movie;
+import com.example.jc_mdb.model.tmdb.Movie;
 import com.example.jc_mdb.service.FetchFirstTimeDataService;
 import com.example.jc_mdb.service.FetchGenresListService;
 import com.example.jc_mdb.utils.SearchUtil;

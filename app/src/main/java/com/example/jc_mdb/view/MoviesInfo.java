@@ -26,16 +26,15 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
- import com.example.jc_mdb.adapter.CastsAdapter;
+import com.example.jc_mdb.adapter.CastsAdapter;
 import com.example.jc_mdb.adapter.ReviewsAdapter;
 import com.example.jc_mdb.config.BuildConfigs;
- import com.example.jc_mdb.model.tmdb.Cast;
+import com.example.jc_mdb.model.tmdb.Cast;
 import com.example.jc_mdb.model.tmdb.CastsList;
 import com.example.jc_mdb.model.tmdb.Genre;
 import com.example.jc_mdb.model.tmdb.Movie;
 import com.example.jc_mdb.model.tmdb.Review;
 import com.example.jc_mdb.model.tmdb.ReviewsList;
- import com.example.jc_mdb.service.TorrentDownloaderService;
 import com.example.jc_mdb.service.TorrentFetcherService;
 import com.example.jc_mdb.service.network.RetrofitInstance;
 import com.example.jc_mdb.service.network.TMDbService;
@@ -45,9 +44,10 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
-
 import com.sg.moviesindex.R;
+
 import com.sg.moviesindex.databinding.ActivityMoviesInfoBinding;
+
 import com.varunest.sparkbutton.SparkButton;
 
 import java.text.DateFormat;
@@ -67,7 +67,7 @@ import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 public class MoviesInfo extends AppCompatActivity implements TorrentFetcherService.OnCompleteListener {
-    private com.example.jc_mdb.model.yts.Movie movie;
+    private Movie movie;
     private Boolean bool;
     private ActivityMoviesInfoBinding activityMoviesInfoBinding;
     private MainViewModel mainViewModel;
@@ -120,7 +120,7 @@ public class MoviesInfo extends AppCompatActivity implements TorrentFetcherServi
             movie = i.getParcelableExtra("movie");
             bool = i.getBooleanExtra("boolean", false);
             if (MainActivity.imageup <= 2) {
-                //  Snackbar.make(parentLayout, "Swipe Image Up For More Information!", Snackbar.LENGTH_SHORT).show();
+              //  Snackbar.make(parentLayout, "Swipe Image Up For More Information!", Snackbar.LENGTH_SHORT).show();
                 MainActivity.imageup++;
             }
             if (mainViewModel.getMovie(movie.getTitle()) != null) {
@@ -334,7 +334,7 @@ public class MoviesInfo extends AppCompatActivity implements TorrentFetcherServi
         if (requestCode == MY_PERMISSIONS_REQUESTS_STORAGE_PERMISSIONS) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
-                torrentFetcherService.start(btnSignIn, movie);
+              //  torrentFetcherService.start(btnSignIn, movie);
             } else {
                 Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
                 new MaterialAlertDialogBuilder(MoviesInfo.this).setTitle("Permission Required")
@@ -395,8 +395,8 @@ public class MoviesInfo extends AppCompatActivity implements TorrentFetcherServi
     };
 
     private void startTorrentDownload() {
-        Intent intent = new Intent(this, TorrentDownloaderService.class);
-        startService(intent);
+//        Intent intent = new Intent(this, TorrentDownloaderService.class);
+//        startService(intent);
     }
 
 }

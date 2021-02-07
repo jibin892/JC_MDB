@@ -6,7 +6,7 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
- import com.example.jc_mdb.utils.Tools;
+import com.example.jc_mdb.utils.Tools;
 import com.sg.moviesindex.R;
 
 

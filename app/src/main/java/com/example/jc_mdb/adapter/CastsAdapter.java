@@ -13,9 +13,11 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
- import com.example.jc_mdb.model.tmdb.CastsList;
+import com.example.jc_mdb.model.tmdb.Cast;
+import com.example.jc_mdb.model.tmdb.CastsList;
 import com.sg.moviesindex.R;
 import com.sg.moviesindex.databinding.CastListItemBinding;
+
 
 
 public class CastsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -51,9 +53,9 @@ public class CastsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         if (viewHolder instanceof CastsViewHolder) {
-//            Cast cast = castsList.getCast().get(i);
-//            ((CastsViewHolder) viewHolder).castListItemBinding.setCast(cast);
-//            ((CastsViewHolder) viewHolder).castListItemBinding.setGender(cast.getGender() == 1 ? "Female" : cast.getGender() == 2 ? "Male" : "Unknown");
+            Cast cast = castsList.getCast().get(i);
+            ((CastsViewHolder) viewHolder).castListItemBinding.setCast(cast);
+            ((CastsViewHolder) viewHolder).castListItemBinding.setGender(cast.getGender() == 1 ? "Female" : cast.getGender() == 2 ? "Male" : "Unknown");
         } else if (viewHolder instanceof LoadingViewHolder) {
         }
     }

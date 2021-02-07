@@ -7,7 +7,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 
-import com.example.jc_mdb.model.yts.Movie;
+import com.example.jc_mdb.model.tmdb.Movie;
 
 import java.util.List;
 

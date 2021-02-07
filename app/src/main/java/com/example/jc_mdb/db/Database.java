@@ -11,7 +11,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.example.jc_mdb.db.typeconverters.CastTypeConverter;
 import com.example.jc_mdb.db.typeconverters.GenreTypeConverter;
 import com.example.jc_mdb.db.typeconverters.ReviewTypeConverter;
-import com.example.jc_mdb.model.yts.Movie;
+import com.example.jc_mdb.model.tmdb.Movie;
 
 
 @androidx.room.Database(entities = Movie.class, version = 2)

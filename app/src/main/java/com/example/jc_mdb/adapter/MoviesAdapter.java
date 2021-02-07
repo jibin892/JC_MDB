@@ -2,7 +2,6 @@ package com.example.jc_mdb.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +14,11 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-
 import com.example.jc_mdb.model.tmdb.Movie;
 import com.example.jc_mdb.view.MoviesInfo;
 import com.sg.moviesindex.R;
 import com.sg.moviesindex.databinding.MovieListItemBinding;
+
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -81,7 +80,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     class MoviesViewHolder extends RecyclerView.ViewHolder {
-        private final MovieListItemBinding movieListItemBinding;
+        private MovieListItemBinding movieListItemBinding;
 
         MoviesViewHolder(@NonNull final MovieListItemBinding movieListItemBinding) {
             super(movieListItemBinding.getRoot());
@@ -93,7 +92,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     if (position != RecyclerView.NO_POSITION) {
                         Movie movie = movies.get(position);
                         Intent i = new Intent(context, MoviesInfo.class);
-                        i.putExtra("movie", (Parcelable) movie);
+                        i.putExtra("movie", movie);
                         context.startActivity(i);
                     }
                 }

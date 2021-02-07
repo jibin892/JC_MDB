@@ -9,7 +9,6 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.example.jc_mdb.adapter.TorrentsListItemAdapter;
 import com.example.jc_mdb.model.tmdb.Movie;
 import com.example.jc_mdb.model.yts.APIResponse;
 import com.example.jc_mdb.model.yts.Torrent;
@@ -33,7 +32,7 @@ public class TorrentFetcherService {
     private APIResponse response = new APIResponse();
     private final Context context;
     public static Torrent resultantTorrent;
-    private com.example.jc_mdb.model.yts.Movie resultantMovie;
+    private Movie resultantMovie;
 
     public interface OnCompleteListener {
         public void onComplete(boolean error);
@@ -84,13 +83,13 @@ public class TorrentFetcherService {
                         button.revertAnimation();
                         button.stopAnimation();
                         if(response!=null) {
-                            if (response.getData().getMovieCount() == 0) {
-                                Toast.makeText(context, "No Torrents Found!", Toast.LENGTH_SHORT).show();
-
-                            } else {
-                                resultantMovie = response.getData().getMovies().get(0);
-                                showMaterialDialog(movieTMDb, button);
-                            }
+//                            if (response.getData().getMovieCount() == 0) {
+//                                Toast.makeText(context, "No Torrents Found!", Toast.LENGTH_SHORT).show();
+//
+//                            } else {
+//                                resultantMovie = response.getData().getMovies().get(0);
+//                                showMaterialDialog(movieTMDb, button);
+//                            }
                         }
                     }
                 }));

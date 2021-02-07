@@ -4,9 +4,10 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
+
 import com.example.jc_mdb.db.Database;
 import com.example.jc_mdb.db.FavouriteMoviesDAO;
-import com.example.jc_mdb.model.yts.Movie;
+import com.example.jc_mdb.model.tmdb.Movie;
 
 import java.util.List;
 

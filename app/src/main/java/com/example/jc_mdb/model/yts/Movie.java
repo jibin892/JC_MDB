@@ -1,147 +1,97 @@
 package com.example.jc_mdb.model.yts;
 
-import android.annotation.SuppressLint;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
-import androidx.databinding.BaseObservable;
-import androidx.databinding.Bindable;
-import androidx.databinding.library.baseAdapters.BR;
-import androidx.recyclerview.widget.DiffUtil;
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
-
-import com.example.jc_mdb.model.tmdb.Cast;
-import com.example.jc_mdb.model.tmdb.Genre;
-import com.example.jc_mdb.model.tmdb.Review;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 
-@Entity(tableName = "favourite_movies")
-public class Movie extends BaseObservable implements Parcelable {
+public class Movie implements Serializable, Parcelable {
 
-    @ColumnInfo(name = "imdb_id")
-    @SerializedName("imdb_id")
-    @Expose
-    private String imdbId;
-
-    @Ignore
-    @SerializedName("genre_ids")
-    @Expose
-    private List<Integer> genreIds = new ArrayList<>();
-
-
-    @ColumnInfo(name = "budget")
-    @SerializedName("budget")
-    @Expose
-    private Long budget;
-
-    @ColumnInfo(name = "revenue")
-    @SerializedName("revenue")
-    @Expose
-    private Long revenue;
-
-    @ColumnInfo(name = "runtime")
-    @SerializedName("runtime")
-    @Expose
-    private Long runtime;
-
-    @ColumnInfo(name = "status")
-    @SerializedName("status")
-    @Expose
-    private String status;
-
-    @ColumnInfo(name = "tagline")
-    @SerializedName("tagline")
-    @Expose
-    private String tagline;
-
-
-    @ColumnInfo(name = "id")
-    @PrimaryKey(autoGenerate = true)
     @SerializedName("id")
     @Expose
     private Long id;
-
-    @ColumnInfo(name = "video")
-    @SerializedName("video")
+    @SerializedName("url")
     @Expose
-    private Boolean video;
-
-    @ColumnInfo(name = "vote_average")
-    @SerializedName("vote_average")
+    private String url;
+    @SerializedName("imdb_code")
     @Expose
-    private Double voteAverage;
-
-    @ColumnInfo(name = "title")
+    private String imdbCode;
     @SerializedName("title")
     @Expose
     private String title;
-
-    @ColumnInfo(name = "popularity")
-    @SerializedName("popularity")
+    @SerializedName("title_english")
     @Expose
-    private Double popularity;
-
-    @ColumnInfo(name = "poster_path")
-    @SerializedName("poster_path")
+    private String titleEnglish;
+    @SerializedName("title_long")
     @Expose
-    private String posterPath;
-
-
-    @ColumnInfo(name = "original_language")
-    @SerializedName("original_language")
+    private String titleLong;
+    @SerializedName("slug")
     @Expose
-    private String originalLanguage;
-
-    @ColumnInfo(name = "original_title")
-    @SerializedName("original_title")
+    private String slug;
+    @SerializedName("year")
     @Expose
-    private String originalTitle;
-
-    @ColumnInfo(name = "genres")
+    private Long year;
+    @SerializedName("rating")
+    @Expose
+    private Double rating;
+    @SerializedName("runtime")
+    @Expose
+    private Long runtime;
     @SerializedName("genres")
     @Expose
-    private ArrayList<Genre> genres = new ArrayList<>();
-
-
-    @ColumnInfo(name = "backdrop_path")
-    @SerializedName("backdrop_path")
+    private List<String> genres = null;
+    @SerializedName("summary")
     @Expose
-    private String backdropPath;
-
-    @ColumnInfo(name = "adult")
-    @SerializedName("adult")
+    private String summary;
+    @SerializedName("description_full")
     @Expose
-    private Boolean adult;
-
-    @ColumnInfo(name = "overview")
-    @SerializedName("overview")
+    private String descriptionFull;
+    @SerializedName("synopsis")
     @Expose
-    private String overview;
-
-    @ColumnInfo(name = "release_date")
-    @SerializedName("release_date")
+    private String synopsis;
+    @SerializedName("yt_trailer_code")
     @Expose
-    private String releaseDate;
+    private String ytTrailerCode;
+    @SerializedName("language")
+    @Expose
+    private String language;
+    @SerializedName("mpa_rating")
+    @Expose
+    private String mpaRating;
+    @SerializedName("background_image")
+    @Expose
+    private String backgroundImage;
+    @SerializedName("background_image_original")
+    @Expose
+    private String backgroundImageOriginal;
+    @SerializedName("small_cover_image")
+    @Expose
+    private String smallCoverImage;
+    @SerializedName("medium_cover_image")
+    @Expose
+    private String mediumCoverImage;
+    @SerializedName("large_cover_image")
+    @Expose
+    private String largeCoverImage;
+    @SerializedName("state")
+    @Expose
+    private String state;
+    @SerializedName("torrents")
+    @Expose
+    private List<Torrent> torrents = null;
+    @SerializedName("date_uploaded")
+    @Expose
+    private String dateUploaded;
+    @SerializedName("date_uploaded_unix")
+    @Expose
+    private Long dateUploadedUnix;
+    public final static Creator<Movie> CREATOR = new Creator<Movie>() {
 
-    @ColumnInfo(name = "casts_list")
-    private ArrayList<Cast> castsList = new ArrayList<>();
 
-    @ColumnInfo(name = "reviews_list")
-    private ArrayList<Review> reviewsList = new ArrayList<>();
-
-
-    @Ignore
-    public final static Parcelable.Creator<Movie> CREATOR = new Creator<Movie>() {
-
-        @Ignore
         @SuppressWarnings({
                 "unchecked"
         })
@@ -149,357 +99,346 @@ public class Movie extends BaseObservable implements Parcelable {
             return new Movie(in);
         }
 
-        @Ignore
         public Movie[] newArray(int size) {
             return (new Movie[size]);
         }
 
     };
+    private final static long serialVersionUID = -4667057645999373583L;
 
-
-    @Ignore
     protected Movie(Parcel in) {
-        this.adult = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
-        this.backdropPath = ((String) in.readValue((String.class.getClassLoader())));
-        this.budget = ((Long) in.readValue((Long.class.getClassLoader())));
-        in.readTypedList(this.genres, (Genre.CREATOR));
         this.id = ((Long) in.readValue((Long.class.getClassLoader())));
-        this.imdbId = ((String) in.readValue((String.class.getClassLoader())));
-        this.originalLanguage = ((String) in.readValue((String.class.getClassLoader())));
-        this.originalTitle = ((String) in.readValue((String.class.getClassLoader())));
-        this.overview = ((String) in.readValue((String.class.getClassLoader())));
-        this.popularity = ((Double) in.readValue((Double.class.getClassLoader())));
-        this.posterPath = ((String) in.readValue((String.class.getClassLoader())));
-        this.releaseDate = ((String) in.readValue((String.class.getClassLoader())));
-        this.revenue = ((Long) in.readValue((Long.class.getClassLoader())));
-        this.runtime = ((Long) in.readValue((Long.class.getClassLoader())));
-        this.status = ((String) in.readValue((String.class.getClassLoader())));
-        this.tagline = ((String) in.readValue((String.class.getClassLoader())));
+        this.url = ((String) in.readValue((String.class.getClassLoader())));
+        this.imdbCode = ((String) in.readValue((String.class.getClassLoader())));
         this.title = ((String) in.readValue((String.class.getClassLoader())));
-        this.video = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
-        this.voteAverage = ((Double) in.readValue((Double.class.getClassLoader())));
-        in.readList(this.genreIds, (java.lang.Integer.class.getClassLoader()));
-        in.readTypedList(castsList, Cast.CREATOR);
-        in.readTypedList(reviewsList, Review.CREATOR);
+        this.titleEnglish = ((String) in.readValue((String.class.getClassLoader())));
+        this.titleLong = ((String) in.readValue((String.class.getClassLoader())));
+        this.slug = ((String) in.readValue((String.class.getClassLoader())));
+        this.year = ((Long) in.readValue((Long.class.getClassLoader())));
+        this.rating = ((Double) in.readValue((Double.class.getClassLoader())));
+        this.runtime = ((Long) in.readValue((Long.class.getClassLoader())));
+        in.readList(this.genres, (String.class.getClassLoader()));
+        this.summary = ((String) in.readValue((String.class.getClassLoader())));
+        this.descriptionFull = ((String) in.readValue((String.class.getClassLoader())));
+        this.synopsis = ((String) in.readValue((String.class.getClassLoader())));
+        this.ytTrailerCode = ((String) in.readValue((String.class.getClassLoader())));
+        this.language = ((String) in.readValue((String.class.getClassLoader())));
+        this.mpaRating = ((String) in.readValue((String.class.getClassLoader())));
+        this.backgroundImage = ((String) in.readValue((String.class.getClassLoader())));
+        this.backgroundImageOriginal = ((String) in.readValue((String.class.getClassLoader())));
+        this.smallCoverImage = ((String) in.readValue((String.class.getClassLoader())));
+        this.mediumCoverImage = ((String) in.readValue((String.class.getClassLoader())));
+        this.largeCoverImage = ((String) in.readValue((String.class.getClassLoader())));
+        this.state = ((String) in.readValue((String.class.getClassLoader())));
+        in.readList(this.torrents, (Torrent.class.getClassLoader()));
+        this.dateUploaded = ((String) in.readValue((String.class.getClassLoader())));
+        this.dateUploadedUnix = ((Long) in.readValue((Long.class.getClassLoader())));
     }
 
-
-    @Ignore
+    /**
+     * No args constructor for use in serialization
+     */
     public Movie() {
     }
 
-    public Movie(Boolean adult, String backdropPath, Long budget, ArrayList<Genre> genres, Long id, String imdbId, String originalLanguage, String originalTitle, String overview, Double popularity, String posterPath, String releaseDate, Long revenue, Long runtime, String status, String tagline, String title, Boolean video, Double voteAverage, ArrayList<Cast> castsList, ArrayList<Review> reviewsList) {
+    /**
+     * @param year
+     * @param mpaRating
+     * @param backgroundImage
+     * @param rating
+     * @param dateUploaded
+     * @param language
+     * @param backgroundImageOriginal
+     * @param title
+     * @param titleEnglish
+     * @param dateUploadedUnix
+     * @param largeCoverImage
+     * @param genres
+     * @param descriptionFull
+     * @param id
+     * @param titleLong
+     * @param mediumCoverImage
+     * @param state
+     * @param smallCoverImage
+     * @param slug
+     * @param summary
+     * @param imdbCode
+     * @param runtime
+     * @param synopsis
+     * @param url
+     * @param ytTrailerCode
+     * @param torrents
+     */
+    public Movie(Long id, String url, String imdbCode, String title, String titleEnglish, String titleLong, String slug, Long year, Double rating, Long runtime, List<String> genres, String summary, String descriptionFull, String synopsis, String ytTrailerCode, String language, String mpaRating, String backgroundImage, String backgroundImageOriginal, String smallCoverImage, String mediumCoverImage, String largeCoverImage, String state, List<Torrent> torrents, String dateUploaded, Long dateUploadedUnix) {
         super();
-        this.adult = adult;
-        this.backdropPath = backdropPath;
-        this.budget = budget;
-        this.genres = genres;
         this.id = id;
-        this.imdbId = imdbId;
-        this.originalLanguage = originalLanguage;
-        this.originalTitle = originalTitle;
-        this.overview = overview;
-        this.popularity = popularity;
-        this.posterPath = posterPath;
-        this.releaseDate = releaseDate;
-        this.revenue = revenue;
-        this.runtime = runtime;
-        this.status = status;
-        this.tagline = tagline;
+        this.url = url;
+        this.imdbCode = imdbCode;
         this.title = title;
-        this.video = video;
-        this.voteAverage = voteAverage;
-        this.castsList = castsList;
-        this.reviewsList = reviewsList;
+        this.titleEnglish = titleEnglish;
+        this.titleLong = titleLong;
+        this.slug = slug;
+        this.year = year;
+        this.rating = rating;
+        this.runtime = runtime;
+        this.genres = genres;
+        this.summary = summary;
+        this.descriptionFull = descriptionFull;
+        this.synopsis = synopsis;
+        this.ytTrailerCode = ytTrailerCode;
+        this.language = language;
+        this.mpaRating = mpaRating;
+        this.backgroundImage = backgroundImage;
+        this.backgroundImageOriginal = backgroundImageOriginal;
+        this.smallCoverImage = smallCoverImage;
+        this.mediumCoverImage = mediumCoverImage;
+        this.largeCoverImage = largeCoverImage;
+        this.state = state;
+        this.torrents = torrents;
+        this.dateUploaded = dateUploaded;
+        this.dateUploadedUnix = dateUploadedUnix;
     }
 
-
-    @Ignore
-    public List<Integer> getGenreIds() {
-        return genreIds;
-    }
-
-    @Ignore
-    public void setGenreIds(List<Integer> genreIds) {
-        this.genreIds = genreIds;
-    }
-
-    @Bindable
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-        notifyPropertyChanged(BR.id);
     }
 
-    @Bindable
-    public Boolean getVideo() {
-        return video;
+    public String getUrl() {
+        return url;
     }
 
-    public void setVideo(Boolean video) {
-        this.video = video;
-        notifyPropertyChanged(BR.video);
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    @Bindable
-    public Double getVoteAverage() {
-        return voteAverage;
+    public String getImdbCode() {
+        return imdbCode;
     }
 
-    public void setVoteAverage(Double voteAverage) {
-        this.voteAverage = voteAverage;
-
-        notifyPropertyChanged(BR.voteAverage);
+    public void setImdbCode(String imdbCode) {
+        this.imdbCode = imdbCode;
     }
 
-    @Bindable
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
-        notifyPropertyChanged(BR.title);
     }
 
-    @Bindable
-    public Double getPopularity() {
-        return popularity;
+    public String getTitleEnglish() {
+        return titleEnglish;
     }
 
-    public void setPopularity(Double popularity) {
-        this.popularity = popularity;
-        notifyPropertyChanged(BR.popularity);
+    public void setTitleEnglish(String titleEnglish) {
+        this.titleEnglish = titleEnglish;
     }
 
-    @Bindable
-    public String getPosterPath() {
-        return posterPath;
+    public String getTitleLong() {
+        return titleLong;
     }
 
-    public void setPosterPath(String posterPath) {
-        this.posterPath = posterPath;
-        notifyPropertyChanged(BR.posterPath);
+    public void setTitleLong(String titleLong) {
+        this.titleLong = titleLong;
     }
 
-    @Bindable
-    public String getOriginalLanguage() {
-        return originalLanguage;
+    public String getSlug() {
+        return slug;
     }
 
-    public void setOriginalLanguage(String originalLanguage) {
-        this.originalLanguage = originalLanguage;
-        notifyPropertyChanged(BR.originalLanguage);
+    public void setSlug(String slug) {
+        this.slug = slug;
     }
 
-    @Bindable
-    public String getOriginalTitle() {
-        return originalTitle;
+    public Long getYear() {
+        return year;
     }
 
-    public void setOriginalTitle(String originalTitle) {
-        this.originalTitle = originalTitle;
-        notifyPropertyChanged(BR.originalTitle);
+    public void setYear(Long year) {
+        this.year = year;
     }
 
-
-    @Bindable
-    public String getBackdropPath() {
-        return backdropPath;
+    public Double getRating() {
+        return rating;
     }
 
-    public void setBackdropPath(String backdropPath) {
-        this.backdropPath = backdropPath;
-        notifyPropertyChanged(BR.backdropPath);
+    public void setRating(Double rating) {
+        this.rating = rating;
     }
 
-    @Bindable
-    public Boolean getAdult() {
-        return adult;
-    }
-
-    public void setAdult(Boolean adult) {
-        this.adult = adult;
-        notifyPropertyChanged(BR.adult);
-    }
-
-    @Bindable
-    public String getOverview() {
-        return overview;
-    }
-
-    public void setOverview(String overview) {
-        this.overview = overview;
-        notifyPropertyChanged(BR.overview);
-    }
-
-    @Bindable
-    public String getReleaseDate() {
-        return releaseDate;
-    }
-
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
-        notifyPropertyChanged(BR.releaseDate);
-    }
-
-    @Bindable
-    public String getImdbId() {
-        return imdbId;
-    }
-
-    public void setImdbId(String imdbId) {
-        this.imdbId = imdbId;
-        notifyPropertyChanged(BR.imdbId);
-    }
-
-    @Bindable
-    public Long getBudget() {
-        return budget;
-    }
-
-    public void setBudget(Long budget) {
-        this.budget = budget;
-        notifyPropertyChanged(BR.budget);
-    }
-
-    @Bindable
-    public Long getRevenue() {
-        return revenue;
-    }
-
-    public void setRevenue(Long revenue) {
-        this.revenue = revenue;
-        notifyPropertyChanged(BR.revenue);
-    }
-
-    @Bindable
     public Long getRuntime() {
         return runtime;
     }
 
     public void setRuntime(Long runtime) {
         this.runtime = runtime;
-        notifyPropertyChanged(BR.runtime);
     }
 
-    @Bindable
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-        notifyPropertyChanged(BR.status);
-    }
-
-    @Bindable
-    public String getTagline() {
-        return tagline;
-    }
-
-    public void setTagline(String tagline) {
-        this.tagline = tagline;
-        notifyPropertyChanged(BR.tagline);
-    }
-
-    @Bindable
-    public ArrayList<Genre> getGenres() {
+    public List<String> getGenres() {
         return genres;
     }
 
-    public void setGenres(ArrayList<Genre> genres) {
+    public void setGenres(List<String> genres) {
         this.genres = genres;
-        notifyPropertyChanged(BR.genres);
     }
 
-    @Bindable
-    public ArrayList<Cast> getCastsList() {
-        return castsList;
+    public String getSummary() {
+        return summary;
     }
 
-    public void setCastsList(ArrayList<Cast> castsList) {
-        this.castsList = castsList;
-        notifyPropertyChanged(BR.castsList);
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
-    @Bindable
-    public ArrayList<Review> getReviewsList() {
-        return reviewsList;
+    public String getDescriptionFull() {
+        return descriptionFull;
     }
 
-    public void setReviewsList(ArrayList<Review> reviewsList) {
-        this.reviewsList = reviewsList;
-        notifyPropertyChanged(BR.reviewsList);
+    public void setDescriptionFull(String descriptionFull) {
+        this.descriptionFull = descriptionFull;
     }
 
-    @Ignore
+    public String getSynopsis() {
+        return synopsis;
+    }
+
+    public void setSynopsis(String synopsis) {
+        this.synopsis = synopsis;
+    }
+
+    public String getYtTrailerCode() {
+        return ytTrailerCode;
+    }
+
+    public void setYtTrailerCode(String ytTrailerCode) {
+        this.ytTrailerCode = ytTrailerCode;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public String getMpaRating() {
+        return mpaRating;
+    }
+
+    public void setMpaRating(String mpaRating) {
+        this.mpaRating = mpaRating;
+    }
+
+    public String getBackgroundImage() {
+        return backgroundImage;
+    }
+
+    public void setBackgroundImage(String backgroundImage) {
+        this.backgroundImage = backgroundImage;
+    }
+
+    public String getBackgroundImageOriginal() {
+        return backgroundImageOriginal;
+    }
+
+    public void setBackgroundImageOriginal(String backgroundImageOriginal) {
+        this.backgroundImageOriginal = backgroundImageOriginal;
+    }
+
+    public String getSmallCoverImage() {
+        return smallCoverImage;
+    }
+
+    public void setSmallCoverImage(String smallCoverImage) {
+        this.smallCoverImage = smallCoverImage;
+    }
+
+    public String getMediumCoverImage() {
+        return mediumCoverImage;
+    }
+
+    public void setMediumCoverImage(String mediumCoverImage) {
+        this.mediumCoverImage = mediumCoverImage;
+    }
+
+    public String getLargeCoverImage() {
+        return largeCoverImage;
+    }
+
+    public void setLargeCoverImage(String largeCoverImage) {
+        this.largeCoverImage = largeCoverImage;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public List<Torrent> getTorrents() {
+        return torrents;
+    }
+
+    public void setTorrents(List<Torrent> torrents) {
+        this.torrents = torrents;
+    }
+
+    public String getDateUploaded() {
+        return dateUploaded;
+    }
+
+    public void setDateUploaded(String dateUploaded) {
+        this.dateUploaded = dateUploaded;
+    }
+
+    public Long getDateUploadedUnix() {
+        return dateUploadedUnix;
+    }
+
+    public void setDateUploadedUnix(Long dateUploadedUnix) {
+        this.dateUploadedUnix = dateUploadedUnix;
+    }
+
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(adult);
-        dest.writeValue(backdropPath);
-        dest.writeValue(budget);
-        dest.writeTypedList(genres);
         dest.writeValue(id);
-        dest.writeValue(imdbId);
-        dest.writeValue(originalLanguage);
-        dest.writeValue(originalTitle);
-        dest.writeValue(overview);
-        dest.writeValue(popularity);
-        dest.writeValue(posterPath);
-        dest.writeValue(releaseDate);
-        dest.writeValue(revenue);
-        dest.writeValue(runtime);
-        dest.writeValue(status);
-        dest.writeValue(tagline);
+        dest.writeValue(url);
+        dest.writeValue(imdbCode);
         dest.writeValue(title);
-        dest.writeValue(video);
-        dest.writeValue(voteAverage);
-        dest.writeList(genreIds);
-        dest.writeTypedList(castsList);
-        dest.writeTypedList(reviewsList);
+        dest.writeValue(titleEnglish);
+        dest.writeValue(titleLong);
+        dest.writeValue(slug);
+        dest.writeValue(year);
+        dest.writeValue(rating);
+        dest.writeValue(runtime);
+        dest.writeList(genres);
+        dest.writeValue(summary);
+        dest.writeValue(descriptionFull);
+        dest.writeValue(synopsis);
+        dest.writeValue(ytTrailerCode);
+        dest.writeValue(language);
+        dest.writeValue(mpaRating);
+        dest.writeValue(backgroundImage);
+        dest.writeValue(backgroundImageOriginal);
+        dest.writeValue(smallCoverImage);
+        dest.writeValue(mediumCoverImage);
+        dest.writeValue(largeCoverImage);
+        dest.writeValue(state);
+        dest.writeList(torrents);
+        dest.writeValue(dateUploaded);
+        dest.writeValue(dateUploadedUnix);
     }
 
-
-    @Ignore
     public int describeContents() {
         return 0;
     }
 
-    public static final DiffUtil.ItemCallback<Movie> callback = new DiffUtil.ItemCallback<Movie>() {
-        @Override
-        public boolean areItemsTheSame(@NonNull Movie oldItem, @NonNull Movie newItem) {
-            return oldItem.id.equals(newItem.id);
-        }
-
-        @SuppressLint("DiffUtilEquals")
-        @Override
-        public boolean areContentsTheSame(@NonNull Movie oldItem, @NonNull Movie newItem) {
-            return oldItem.adult == newItem.adult &&
-                    oldItem.video == newItem.video &&
-                    oldItem.backdropPath.equals(newItem.backdropPath) &&
-                    oldItem.id.equals(newItem.id) &&
-                    oldItem.originalLanguage.equals(newItem.originalLanguage) &&
-                    oldItem.originalTitle.equals(newItem.originalTitle) &&
-                    oldItem.overview.equals(newItem.overview) &&
-                    oldItem.popularity.equals(newItem.popularity) &&
-                    oldItem.posterPath.equals(newItem.posterPath) &&
-                    oldItem.releaseDate.equals(newItem.releaseDate) &&
-                    oldItem.title.equals(newItem.title) &&
-                    oldItem.voteAverage.equals(newItem.voteAverage) &&
-                    oldItem.castsList.equals(newItem.castsList) &&
-                    oldItem.reviewsList.equals(newItem.reviewsList);
-        }
-    };
-
-    @Override
-    public String toString() {
-        return "Movie{" +
-                "title='" + title + '\'' +
-                ", originalLanguage='" + originalLanguage + '\'' +
-
-                '}';
-    }
 }
+

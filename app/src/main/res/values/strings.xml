@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">JIBIN_MDB</string>
+    <string name="app_name">JC_MDB</string>
     <string name="title_activity_movies_info">Movies Index</string>
     <string name="favourite_movies">Favourite Movies</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>

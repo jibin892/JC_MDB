@@ -3,7 +3,6 @@ package com.example.jc_mdb.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +10,10 @@ import android.widget.TextView;
 
 import androidx.cursoradapter.widget.CursorAdapter;
 
-
- import com.example.jc_mdb.model.yts.Movie;
+import com.example.jc_mdb.model.tmdb.Movie;
 import com.example.jc_mdb.view.MoviesInfo;
 import com.sg.moviesindex.R;
+
 
 import java.util.ArrayList;
 
@@ -59,7 +58,7 @@ public class SearchAdapter extends CursorAdapter {
                 int id = (Integer) view.getTag();//here is the position
                 Movie movie = movies.get(id);
                 Intent i = new Intent(mContext, MoviesInfo.class);
-                i.putExtra("movie", (Parcelable) movie);
+                i.putExtra("movie", movie);
                 mContext.startActivity(i);
             }
         });

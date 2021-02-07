@@ -7,15 +7,15 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
-import androidx.databinding.library.baseAdapters.BR;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
- import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.sg.moviesindex.BR;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -136,7 +136,7 @@ public class Movie extends BaseObservable implements Parcelable {
 
 
     @Ignore
-    public final static Parcelable.Creator<Movie> CREATOR = new Creator<Movie>() {
+    public final static Creator<Movie> CREATOR = new Creator<Movie>() {
 
         @Ignore
         @SuppressWarnings({
@@ -175,7 +175,7 @@ public class Movie extends BaseObservable implements Parcelable {
         this.title = ((String) in.readValue((String.class.getClassLoader())));
         this.video = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
         this.voteAverage = ((Double) in.readValue((Double.class.getClassLoader())));
-        in.readList(this.genreIds, (java.lang.Integer.class.getClassLoader()));
+        in.readList(this.genreIds, (Integer.class.getClassLoader()));
         in.readTypedList(castsList, Cast.CREATOR);
         in.readTypedList(reviewsList, Review.CREATOR);
     }

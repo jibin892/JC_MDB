@@ -7,12 +7,11 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.jc_mdb.model.tmdb.Review;
 import com.example.jc_mdb.model.tmdb.ReviewsList;
 import com.sg.moviesindex.R;
 import com.sg.moviesindex.databinding.ReviewListItemBinding;
-
-
-public class ReviewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+ public class ReviewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private ReviewsList reviewsList;
 
     public ReviewsAdapter(ReviewsList reviewsList) {
@@ -31,7 +30,7 @@ public class ReviewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         if (viewHolder instanceof ReviewsViewHolder) {
-            com.example.jc_mdb.model.tmdb.Review review = reviewsList.getResults().get(i);
+            Review review = reviewsList.getResults().get(i);
             ((ReviewsViewHolder) viewHolder).reviewListViewBinding.setReview(review);
         }
     }

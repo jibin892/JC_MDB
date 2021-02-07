@@ -19,6 +19,7 @@ import com.example.jc_mdb.service.network.TMDbService;
 import com.example.jc_mdb.view.MainActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;

@@ -6,7 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.jc_mdb.model.yts.Movie;
+
+import com.example.jc_mdb.model.tmdb.Movie;
 import com.example.jc_mdb.repository.Repository;
 
 import java.util.List;

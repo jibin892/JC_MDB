@@ -12,21 +12,23 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-
 import com.example.jc_mdb.adapter.SearchAdapter;
 import com.example.jc_mdb.config.BuildConfigs;
 import com.example.jc_mdb.fragments.Movies;
 import com.example.jc_mdb.model.tmdb.Discover;
 import com.example.jc_mdb.model.tmdb.DiscoversList;
+import com.example.jc_mdb.model.tmdb.Movie;
 import com.example.jc_mdb.service.FetchFirstTimeDataService;
 import com.example.jc_mdb.service.network.RetrofitInstance;
 import com.example.jc_mdb.service.network.TMDbService;
 import com.example.jc_mdb.view.MainActivity;
 import com.sg.moviesindex.R;
 
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -34,6 +36,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
+
+import static com.example.jc_mdb.view.MainActivity.*;
 
 public class SearchUtil {
     private Observable<DiscoversList> observableDB;
@@ -72,8 +76,8 @@ public class SearchUtil {
                     searchView.setIconified(true);
                     final TMDbService TMDbService = RetrofitInstance.getTMDbService(context);
                     final String ApiKey = BuildConfigs.apiKey;
-                    MainActivity.queryM = query;
-                    MainActivity.drawer = 6;
+                    queryM = query;
+                    drawer = 6;
                     observableDB = TMDbService.search(ApiKey, false, query, 1);
                     compositeDisposable.add(observableDB
                             .subscribeOn(Schedulers.io())
@@ -82,10 +86,10 @@ public class SearchUtil {
                                 @Override
                                 public void onNext(@NotNull DiscoversList discoversList) {
                                     if (discoversList != null && discoversList.getResults() != null) {
-                                        MainActivity.discovers = (ArrayList<Discover>) discoversList.getResults();
-                                        MainActivity.totalPages = discoversList.getTotalPages();
-                                        DiscoverToMovie discoverToMovie = new DiscoverToMovie(MainActivity.discovers);
-                                        MainActivity.movieList = discoverToMovie.getMovies();
+                                        discovers = (ArrayList<Discover>) discoversList.getResults();
+                                        totalPages = discoversList.getTotalPages();
+                                        //DiscoverToMovie discoverToMovie = new DiscoverToMovie(discovers);
+                                      //  movieList = discoverToMovie.getMovies();
                                         if (progressBar != null) {
                                             progressBar.setIndeterminate(false);
                                         }
@@ -114,9 +118,9 @@ public class SearchUtil {
             public boolean onQueryTextChange(String newText) {
                 final TMDbService TMDbService = RetrofitInstance.getTMDbService(context);
                 final String ApiKey = BuildConfigs.apiKey;
-                MainActivity.queryM = newText;
-                MainActivity.drawer = 6;
-                observableDB = TMDbService.search(ApiKey, false, MainActivity.queryM, 1);
+                queryM = newText;
+                drawer = 6;
+                observableDB = TMDbService.search(ApiKey, false, queryM, 1);
                 compositeDisposable.add(observableDB
                         .debounce(400, TimeUnit.MILLISECONDS)
                         .subscribeOn(Schedulers.io())
@@ -125,12 +129,12 @@ public class SearchUtil {
                             @Override
                             public void onNext(DiscoversList discoversList) {
                                 if (discoversList != null && discoversList.getResults() != null) {
-                                    MainActivity.search = (ArrayList<Discover>) discoversList.getResults();
-                                    DiscoverToMovie discoverToMovie = new DiscoverToMovie(MainActivity.search);
-                                    MainActivity.moviesearch = discoverToMovie.getMovies();
-                                    String[] a = new String[MainActivity.moviesearch.size()];
+                                    search = (ArrayList<Discover>) discoversList.getResults();
+                                    DiscoverToMovie discoverToMovie = new DiscoverToMovie(search);
+                                    moviesearch = discoverToMovie.getMovies();
+                                    String[] a = new String[moviesearch.size()];
                                     for (int i = 0; i < a.length; i++) {
-                                        a[i] = MainActivity.moviesearch.get(i).getTitle();
+                                        a[i] = moviesearch.get(i).getTitle();
                                     }
                                     ArrayAdapter<String> Adapter = new ArrayAdapter<String>(context, R.layout.search_list, a);
                                     String[] columnNames = {"_id", "text"};
@@ -143,7 +147,7 @@ public class SearchUtil {
                                         cursor.addRow(temp);
 
                                     }
-                                    SearchAdapter searchAdapter = new SearchAdapter(context, cursor, true, MainActivity.moviesearch);
+                                    SearchAdapter searchAdapter = new SearchAdapter(context, cursor, true, moviesearch);
                                     searchView.setSuggestionsAdapter(searchAdapter);
                                 }
                             }
@@ -174,10 +178,10 @@ public class SearchUtil {
                     @Override
                     public void onNext(DiscoversList discoversList) {
                         if (discoversList != null && discoversList.getResults() != null) {
-                            MainActivity.discovers = (ArrayList<Discover>) discoversList.getResults();
-                            MainActivity.totalPages = discoversList.getTotalPages();
-                            DiscoverToMovie discoverToMovie = new DiscoverToMovie(MainActivity.discovers);
-                            MainActivity.movieList.addAll(discoverToMovie.getMovies());
+                            discovers = (ArrayList<Discover>) discoversList.getResults();
+                            totalPages = discoversList.getTotalPages();
+                            DiscoverToMovie discoverToMovie = new DiscoverToMovie(discovers);
+                            movieList.addAll((Collection<? extends Movie>) discoverToMovie.getMovies());
                         }
                     }
 

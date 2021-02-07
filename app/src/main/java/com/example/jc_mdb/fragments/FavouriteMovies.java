@@ -23,7 +23,8 @@ import com.example.jc_mdb.adapter.MoviesAdapter;
 import com.example.jc_mdb.model.tmdb.Movie;
 import com.example.jc_mdb.viewmodel.MainViewModel;
 import com.sg.moviesindex.R;
-import com.sg.moviesindex.databinding.FragmentFavouriteMoviesBinding;
+ import com.sg.moviesindex.databinding.FragmentFavouriteMoviesBinding;
+
 
 import org.jetbrains.annotations.NotNull;
 
@@ -67,7 +68,7 @@ public class FavouriteMovies extends Fragment {
         getActivity().setTitle("Favourite Movies");
         context = getContext();
         MainViewModel viewModel = new ViewModelProvider(this).get(MainViewModel.class);
-        viewModel.getAllMovies().observe(getActivity(), (Observer<? super List<com.example.jc_mdb.model.yts.Movie>>) new Observer<List<Movie>>() {
+        viewModel.getAllMovies().observe(getActivity(), new Observer<List<Movie>>() {
             @Override
             public void onChanged(List<Movie> movies) {
                 movie = (ArrayList<Movie>) movies;

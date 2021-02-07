@@ -29,7 +29,7 @@ import com.example.jc_mdb.utils.SearchUtil;
 import com.example.jc_mdb.view.MainActivity;
 import com.example.jc_mdb.viewmodel.MainViewModel;
 import com.sg.moviesindex.R;
-import com.sg.moviesindex.databinding.FragmentMoviesBinding;
+ import com.sg.moviesindex.databinding.FragmentMoviesBinding;
 
 
 import org.jetbrains.annotations.NotNull;

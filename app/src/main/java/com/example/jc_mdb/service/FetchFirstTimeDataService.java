@@ -195,8 +195,8 @@ public class FetchFirstTimeDataService implements Parcelable {
                                 if (discoversList.getResults() != null) {
                                     MainActivity.discovers = (ArrayList<Discover>) discoversList.getResults();
                                     MainActivity.totalPagesGenres = discoversList.getTotalPages();
-                                    DiscoverToMovie discoverToMovie = new DiscoverToMovie(MainActivity.discovers);
-                                    MainActivity.movieList = discoverToMovie.getMovies();
+//                                    DiscoverToMovie discoverToMovie = new DiscoverToMovie(MainActivity.discovers);
+//                                    MainActivity.movieList = discoverToMovie.getMovies();
                                     if (progressBar != null) {
                                         progressBar.setIndeterminate(false);
                                     }
