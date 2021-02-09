@@ -16,7 +16,7 @@ public class Splash extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        Tools.setSystemBarColorInt(this, getResources().getColor(R.color.cblue1));
+        Tools.setSystemBarColorInt(this, getResources().getColor(R.color.white));
 
 
 
@@ -27,6 +27,8 @@ public class Splash extends AppCompatActivity {
             public void run() {
                 Intent splash=new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(splash);
+                overridePendingTransition( R.anim.slide_in, R.anim.slide_out );
+
             }
         }, 1000);
 

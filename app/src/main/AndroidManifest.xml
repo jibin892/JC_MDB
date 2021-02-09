@@ -18,7 +18,7 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoActionBar">
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -41,14 +41,12 @@
 
         <activity
             android:name="com.example.jc_mdb.view.MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar">
+             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
         <activity
             android:name="com.example.jc_mdb.view.MoviesInfo"
-            android:label="@string/title_activity_movies_info"
-            android:theme="@style/AppTheme" />
+             android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="preloaded_fonts"

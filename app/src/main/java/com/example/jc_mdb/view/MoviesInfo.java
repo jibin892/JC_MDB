@@ -9,10 +9,15 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
+import android.text.InputType;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -69,6 +74,7 @@ import io.reactivex.schedulers.Schedulers;
 public class MoviesInfo extends AppCompatActivity implements TorrentFetcherService.OnCompleteListener {
     private Movie movie;
     private Boolean bool;
+    private TextView moviename;
     private ActivityMoviesInfoBinding activityMoviesInfoBinding;
     private MainViewModel mainViewModel;
     public static final String PROGRESS_UPDATE = "progress_update";
@@ -91,10 +97,10 @@ public class MoviesInfo extends AppCompatActivity implements TorrentFetcherServi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            Window w = getWindow(); // in Activity's onCreate() for instance
-//            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-//        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window w = getWindow(); // in Activity's onCreate() for instance
+            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
         setContentView(R.layout.activity_movies_info);
         Toolbar toolbar = findViewById(R.id.toolbar);
         View parentLayout = findViewById(android.R.id.content);
@@ -106,6 +112,8 @@ public class MoviesInfo extends AppCompatActivity implements TorrentFetcherServi
         reviews.setResults(new ArrayList<Review>());
         casts.setCast(new ArrayList<Cast>());
         reviews.setTotalPages(1);
+        moviename=findViewById(R.id.moviename);
+        moviename.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
         btnSignIn = activityMoviesInfoBinding.secondaryLayout.btnId;
         torrentFetcherService = new TorrentFetcherService(this, MoviesInfo.this);
         recyclerViewReviews = activityMoviesInfoBinding.secondaryLayout.rvReviews;
