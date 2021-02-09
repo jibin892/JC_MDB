@@ -71,6 +71,7 @@ public class SearchUtil {
                     fragmentManager.popBackStack();
                 }
                 if (!query.isEmpty()) {
+                    Toast.makeText(context, query, Toast.LENGTH_SHORT).show();
                     searchView.setQuery("", false);
                     searchView.clearFocus();
                     searchView.setIconified(true);
@@ -88,8 +89,8 @@ public class SearchUtil {
                                     if (discoversList != null && discoversList.getResults() != null) {
                                         discovers = (ArrayList<Discover>) discoversList.getResults();
                                         totalPages = discoversList.getTotalPages();
-                                        //DiscoverToMovie discoverToMovie = new DiscoverToMovie(discovers);
-                                      //  movieList = discoverToMovie.getMovies();
+                                        DiscoverToMovie discoverToMovie = new DiscoverToMovie(discovers);
+                                        movieList = discoverToMovie.getMovies();
                                         if (progressBar != null) {
                                             progressBar.setIndeterminate(false);
                                         }
@@ -197,4 +198,5 @@ public class SearchUtil {
                     }
                 }));
     }
+
 }

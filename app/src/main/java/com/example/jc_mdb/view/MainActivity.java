@@ -2,13 +2,22 @@ package com.example.jc_mdb.view;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -54,6 +63,7 @@ public class MainActivity extends AppCompatActivity
     public static ArrayList<Discover> search;
     public static ArrayList<Movie> moviesearch;
     public static String queryM;
+    ImageView navimage;
     private LinearLayout linearLayoutError;
     private Button refreshButtonError;
     private NavigationView navigationView;
@@ -66,22 +76,35 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Tools.setSystemBarColorInt(this, getResources().getColor(R.color.cblue1));
-
+//searchinitiate();
         fragmentManager = getSupportFragmentManager();
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         progressBar = findViewById(R.id.progressBar);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
        setSupportActionBar(toolbar);
 
-        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        navimage =  findViewById(R.id.navimage);
+  //        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                drawer.openDrawer(Gravity.LEFT);
+//            }
+//        });
+        navimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawer.openDrawer(Gravity.LEFT);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-
-
-
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
+            }
+        });
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//
+//
+//
+//        drawerLayout.addDrawerListener(toggle);
+//        toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         progressBar.animate().alpha(1).setDuration(500);
         progressBar.setIndeterminate(true);
@@ -92,6 +115,7 @@ public class MainActivity extends AppCompatActivity
         fetchFirstTimeDataService.getDataFirst();
         genresList=new FetchGenresListService(linearLayoutError,refreshButtonError, MainActivity.this,compositeDisposable,fetchFirstTimeDataService,progressBar);
     }
+
 
     @Override
     public void onBackPressed() {
@@ -165,6 +189,27 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+//    private void searchinitiate() {
+//
+//        EditText et_search=findViewById(R.id.et_search);
+//
+//        et_search.addTextChangedListener(new TextWatcher() {
+//
+//            public void afterTextChanged(Editable s) {
+//            }
+//
+//            public void beforeTextChanged(CharSequence s, int start,
+//                                          int count, int after) {
+//            }
+//
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+////
+//
+//            }
+//        });
+//
+//
+//    }
 
 
     @Override
@@ -174,7 +219,7 @@ public class MainActivity extends AppCompatActivity
         SearchView searchView = (SearchView) menuItem.getActionView();
         SearchUtil searchUtil = new SearchUtil(linearLayoutError, refreshButtonError, compositeDisposable, fragmentManager, MainActivity.this, progressBar, fetchFirstTimeDataService);
         searchUtil.search(searchView);
-        return true;
+         return true;
     }
 
     @Override

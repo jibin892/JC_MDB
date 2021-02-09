@@ -6,20 +6,121 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".view.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+     android:background="@color/color_transparent"
+         android:theme="@style/AppTheme.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/toolbar1"
             android:layout_width="match_parent"
-            android:visibility="visible"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/cblue1"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:layout_collapseMode="pin"
+
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+            <ImageView
+                android:id="@+id/navimage"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="start"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="@color/white"
+                android:src="@drawable/menu"
+                app:tint="@color/white" />
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <LinearLayout
+            android:id="@+id/lyt_content_search"
+            android:layout_width="match_parent"
+            android:background="@drawable/corner"
+            android:backgroundTint="@color/cblue1"
+
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+              android:orientation="vertical">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_marginStart="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_transparent"
+                app:layout_collapseMode="pin"
+                app:titleTextColor="@color/white"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/search_bar"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_xxxlarge"
+                android:layout_margin="@dimen/spacing_mlarge"
+                android:clipToPadding="false"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="3dp"
+                app:cardElevation="1dp"
+                app:cardUseCompatPadding="false">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/spacing_xxxlarge"
+                        android:layout_height="@dimen/spacing_xxxlarge"
+                        android:padding="@dimen/spacing_large"
+                        app:srcCompat="@drawable/search"
+                        app:tint="@color/black" />
+
+                    <EditText
+                        android:id="@+id/et_search"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:imeOptions="actionSearch"
+                        android:maxLines="1"
+                        android:paddingStart="@dimen/padding_10"
+                        android:singleLine="true"
+                        android:hint="Search For..."
+                        android:textAlignment="textStart"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black" />
+
+                    <!--                                    <requestFocus />-->
+
+                    <!--                                </TextView>-->
+                    <ImageView
+                        android:id="@+id/speech"
+                        android:layout_width="@dimen/spacing_xxxlarge"
+                        android:layout_height="@dimen/spacing_xxxlarge"
+                        android:padding="@dimen/spacing_large"
+                        app:srcCompat="@drawable/ic_baseline_mic_24"
+                        app:tint="@color/black" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+
+        </LinearLayout>
+        <!--        <androidx.appcompat.widget.Toolbar-->
+        <!--            android:id="@+id/toolbar"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:visibility="visible"-->
+        <!--            android:layout_height="?attr/actionBarSize"-->
+        <!--            android:background="@color/cblue1"-->
+        <!--            app:popupTheme="@style/AppTheme.PopupOverlay" />-->
 
     </com.google.android.material.appbar.AppBarLayout>
 
