@@ -9,6 +9,7 @@
     <color name="chip_color">#cae9f5</color>
     <color name="tmdb_text_color">#63D675</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="light200">#FFEEEEEE</color>
     <color name="cblue1">#F00000</color>
     <color name="color_transparent">#00000000</color>
 </resources>

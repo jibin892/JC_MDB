@@ -71,8 +71,7 @@ public class SearchUtil {
                     fragmentManager.popBackStack();
                 }
                 if (!query.isEmpty()) {
-                    Toast.makeText(context, query, Toast.LENGTH_SHORT).show();
-                    searchView.setQuery("", false);
+                     searchView.setQuery("", false);
                     searchView.clearFocus();
                     searchView.setIconified(true);
                     final TMDbService TMDbService = RetrofitInstance.getTMDbService(context);

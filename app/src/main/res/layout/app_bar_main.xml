@@ -41,9 +41,8 @@
         <LinearLayout
             android:id="@+id/lyt_content_search"
             android:layout_width="match_parent"
-            android:background="@drawable/corner"
-            android:backgroundTint="@color/cblue1"
-
+       android:background="@color/cblue1"
+         android:foreground="@color/color_transparent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
               android:orientation="vertical">
@@ -59,7 +58,7 @@
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
             <androidx.cardview.widget.CardView
                 android:id="@+id/search_bar"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/spacing_xxxlarge"
                 android:layout_margin="@dimen/spacing_mlarge"
@@ -78,29 +77,25 @@
                         android:layout_width="@dimen/spacing_xxxlarge"
                         android:layout_height="@dimen/spacing_xxxlarge"
                         android:padding="@dimen/spacing_large"
+                        android:visibility="gone"
                         app:srcCompat="@drawable/search"
                         app:tint="@color/black" />
 
-                    <EditText
+                    <androidx.appcompat.widget.SearchView
                         android:id="@+id/et_search"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="@android:color/transparent"
-                        android:imeOptions="actionSearch"
-                        android:maxLines="1"
-                        android:paddingStart="@dimen/padding_10"
-                        android:singleLine="true"
-                        android:hint="Search For..."
-                        android:textAlignment="textStart"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/black" />
+
+                          android:imeOptions="actionSearch"
+                         android:paddingStart="@dimen/padding_10"
+                        tools:ignore="RtlSymmetry" />
 
                     <!--                                    <requestFocus />-->
 
                     <!--                                </TextView>-->
                     <ImageView
-                        android:id="@+id/speech"
+                        android:id="@+id/voice"
                         android:layout_width="@dimen/spacing_xxxlarge"
                         android:layout_height="@dimen/spacing_xxxlarge"
                         android:padding="@dimen/spacing_large"
@@ -124,8 +119,10 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_main" />
+    <include
 
+        layout="@layout/content_main"
+        />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

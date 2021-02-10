@@ -1,14 +1,20 @@
 package com.example.jc_mdb.view;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.text.Editable;
+import android.text.SpannableString;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -41,12 +47,14 @@ import com.sg.moviesindex.R;
 
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import io.reactivex.disposables.CompositeDisposable;
 
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private final int REQ_CODE = 100;
 
     private ProgressBar progressBar;
     public static ArrayList<Movie> movieList = new ArrayList<>();
@@ -64,19 +72,42 @@ public class MainActivity extends AppCompatActivity
     public static ArrayList<Movie> moviesearch;
     public static String queryM;
     ImageView navimage;
+    SearchView et_search;
     private LinearLayout linearLayoutError;
     private Button refreshButtonError;
     private NavigationView navigationView;
     public FetchGenresListService genresList;
     private FetchFirstTimeDataService fetchFirstTimeDataService;
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
-
+ImageView voice;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Tools.setSystemBarColorInt(this, getResources().getColor(R.color.cblue1));
-//searchinitiate();
+           et_search=findViewById(R.id.et_search);
+        et_search.onActionViewExpanded();
+et_search.clearFocus();
+         et_search.setQueryHint("Search Movie");
+
+        voice = findViewById(R.id.voice);
+ load_search();
+
+        voice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+                intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Need to speak");
+                try {
+                    startActivityForResult(intent, REQ_CODE);
+                } catch (ActivityNotFoundException a) {
+                    Toast.makeText(getApplicationContext(), "Sorry your device not supported", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         fragmentManager = getSupportFragmentManager();
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         progressBar = findViewById(R.id.progressBar);
@@ -85,12 +116,7 @@ public class MainActivity extends AppCompatActivity
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         navimage =  findViewById(R.id.navimage);
-  //        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                drawer.openDrawer(Gravity.LEFT);
-//            }
-//        });
+
         navimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,13 +124,7 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
-//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-//                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-//
-//
-//
-//        drawerLayout.addDrawerListener(toggle);
-//        toggle.syncState();
+
         navigationView.setNavigationItemSelectedListener(this);
         progressBar.animate().alpha(1).setDuration(500);
         progressBar.setIndeterminate(true);
@@ -114,6 +134,25 @@ public class MainActivity extends AppCompatActivity
         fetchFirstTimeDataService = new FetchFirstTimeDataService(linearLayoutError, refreshButtonError, progressBar, compositeDisposable, fragmentManager, MainActivity.this);
         fetchFirstTimeDataService.getDataFirst();
         genresList=new FetchGenresListService(linearLayoutError,refreshButtonError, MainActivity.this,compositeDisposable,fetchFirstTimeDataService,progressBar);
+    }
+
+    private void load_search() {
+        et_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                SearchUtil searchUtil = new SearchUtil(linearLayoutError, refreshButtonError, compositeDisposable, fragmentManager, MainActivity.this, progressBar, fetchFirstTimeDataService);
+                searchUtil.search(et_search);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                SearchUtil searchUtil = new SearchUtil(linearLayoutError, refreshButtonError, compositeDisposable, fragmentManager, MainActivity.this, progressBar, fetchFirstTimeDataService);
+                searchUtil.search(et_search);
+                return false;
+            }
+        });
     }
 
 
@@ -189,39 +228,35 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-//    private void searchinitiate() {
-//
-//        EditText et_search=findViewById(R.id.et_search);
-//
-//        et_search.addTextChangedListener(new TextWatcher() {
-//
-//            public void afterTextChanged(Editable s) {
-//            }
-//
-//            public void beforeTextChanged(CharSequence s, int start,
-//                                          int count, int after) {
-//            }
-//
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-////
-//
-//            }
-//        });
-//
-//
-//    }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search_view, menu);
-        MenuItem menuItem = menu.findItem(R.id.app_bar_search);
-        SearchView searchView = (SearchView) menuItem.getActionView();
-        SearchUtil searchUtil = new SearchUtil(linearLayoutError, refreshButtonError, compositeDisposable, fragmentManager, MainActivity.this, progressBar, fetchFirstTimeDataService);
-        searchUtil.search(searchView);
-         return true;
+@Override
+public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+
+    switch (requestCode) {
+        case REQ_CODE: {
+
+load_search();
+            if (resultCode == RESULT_OK && null != data) {
+
+
+                ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+
+                load_search();
+
+                 et_search.setQuery((result.get(0)), false);
+
+
+            }
+            break;
+        }
+
+
     }
 
+
+}
     @Override
     protected void onDestroy() {
         super.onDestroy();
