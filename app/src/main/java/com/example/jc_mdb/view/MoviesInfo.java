@@ -51,8 +51,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.sg.moviesindex.R;
 
-import com.sg.moviesindex.databinding.ActivityMoviesInfoBinding;
 
+import com.sg.moviesindex.databinding.ActivityMoviesInfoBinding;
 import com.varunest.sparkbutton.SparkButton;
 
 import java.text.DateFormat;

@@ -28,7 +28,7 @@
         tools:ignore="PrivateResource"
         tools:showIn="@layout/activity_movies_info">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:id="@+id/ad"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -36,92 +36,122 @@
             app:layout_constraintBottom_toBottomOf="@+id/casts"
             app:layout_constraintTop_toBottomOf="@+id/casts">
 
-            <TextView
-                android:id="@+id/tvMovieTitle"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:fontFamily="@font/montserrat"
-                android:padding="16dp"
-                android:text="@{`Original Title:\n`+contentMovie.title}"
-                android:textColor="@android:color/black"
-                android:textSize="20sp"
-                android:layout_marginEnd="104dp"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_constraintLeft_creator="1"
-                tools:layout_constraintTop_creator="1" />
+                android:orientation="horizontal">
 
-            <LinearLayout
-                android:id="@+id/llMovieRating"
-                android:layout_width="wrap_content"
-                android:paddingTop="16dp"
-                android:orientation="vertical"
-                android:layout_marginTop="8dp"
-                android:paddingBottom="4dp"
-                android:layout_height="wrap_content"
-                android:gravity="end"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                tools:layout_constraintTop_creator="1"
-                android:layout_marginStart="12dp"
-                tools:ignore="RtlSymmetry">
+                <LinearLayout
+                    android:layout_width="258dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                <TextView
+                    <TextView
+                        android:id="@+id/tvMovieTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/montserrat"
+                        android:padding="16dp"
+                        android:text="@{`Original Title:\n`+contentMovie.title}"
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:layout_constraintLeft_creator="1"
+                        tools:layout_constraintTop_creator="1" />
+
+                    <TextView
+                        android:id="@+id/tvStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                         android:fontFamily="@font/quicksand_medium"
+                        android:paddingLeft="16dp"
+                        android:paddingTop="4dp"
+                        android:paddingRight="16dp"
+                        android:paddingBottom="4dp"
+                        android:text="@{`Status: `+contentMovie.status}"
+                        android:textSize="20sp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvMovieTitle" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llMovieRating"
                     android:layout_width="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_height="0dp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:textColor="@android:color/black"
-                    android:text="Rating"
-                    android:textSize="16sp" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="end"
 
-                <antonkozyriatskyi.circularprogressindicator.CircularProgressIndicator
-                    android:id="@+id/circularProgress"
-                    android:layout_width="76dp"
-                    android:layout_height="76dp"
-                    android:layout_gravity="start"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginTop="4dp"
-                    app:direction="clockwise"
-                    app:dotColor="?colorPrimary"
-                    app:dotWidth="8dp"
-                    app:drawDot="true"
-                    app:enableProgressAnimation="true"
-                    app:formattingPattern="&#37;.01f"
-                    app:progressBackgroundColor="?colorAccent"
-                    app:progressBackgroundStrokeWidth="4dp"
-                    app:progressCap="round"
-                    app:progressColor="?colorPrimary"
-                    app:progressStrokeWidth="8dp"
-                    app:startAngle="270"
-                    app:textColor="@color/design_default_color_on_secondary"
-                    app:textSize="18sp"
-                    app:fillBackground="false"
-                    app:gradientType="linear"
-                    app:gradientEndColor="@color/colorAccent" />
+                    android:orientation="vertical"
+                    android:paddingTop="1dp"
+                    android:paddingBottom="4dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="RtlSymmetry"
+                    tools:layout_constraintTop_creator="1">
 
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="0dp"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:gravity="center"-->
+<!--                        android:visibility="gone"-->
+<!--                        android:text="Rating"-->
+<!--                        android:textColor="@android:color/black"-->
+<!--                        android:textSize="16sp"-->
+<!--                        android:textStyle="bold" />-->
+
+                    <antonkozyriatskyi.circularprogressindicator.CircularProgressIndicator
+                        android:id="@+id/circularProgress"
+                        android:layout_width="76dp"
+                        android:layout_height="80dp"
+                        android:layout_marginStart="@dimen/padding_10"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="8dp"
+                        app:direction="clockwise"
+                        app:dotColor="?colorPrimary"
+                        app:dotWidth="8dp"
+                        app:drawDot="true"
+                        app:enableProgressAnimation="true"
+                        app:fillBackground="false"
+                        app:formattingPattern="&#37;.01f"
+                        app:gradientEndColor="@color/colorAccent"
+                        app:gradientType="linear"
+                        app:progressBackgroundColor="?colorAccent"
+                        app:progressBackgroundStrokeWidth="4dp"
+                        app:progressCap="round"
+                        app:progressColor="?colorPrimary"
+                        app:progressStrokeWidth="8dp"
+                        app:startAngle="270"
+                        app:textColor="@color/design_default_color_on_secondary"
+                        app:textSize="18sp" />
+
+                </LinearLayout>
+
+                <com.varunest.sparkbutton.SparkButton
+                    android:id="@+id/spark_button"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginStart="@dimen/padding_10"
+                      android:layout_marginBottom="8dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                     app:sparkbutton_activeImage="@drawable/ic_heart_on"
+                    app:sparkbutton_iconSize="48dp"
+                    app:sparkbutton_inActiveImage="@drawable/ic_heart_off"
+                    app:sparkbutton_primaryColor="@color/heart_primary_color"
+                    app:sparkbutton_secondaryColor="@color/heart_secondary_color" />
             </LinearLayout>
 
 
-            <TextView
-                android:id="@+id/tvStatus"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/quicksand_medium"
-                android:paddingLeft="16dp"
-                android:paddingTop="4dp"
-                android:paddingRight="16dp"
-                android:layout_marginEnd="104dp"
-                android:paddingBottom="4dp"
-                android:text="@{`Status: `+contentMovie.status}"
-                android:textSize="20sp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvMovieTitle" />
+
 
 
             <TextView
@@ -166,20 +196,6 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvPopularity" />
 
-            <com.varunest.sparkbutton.SparkButton
-                android:id="@+id/spark_button"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvLanguage"
-                app:sparkbutton_activeImage="@drawable/ic_heart_on"
-                app:sparkbutton_iconSize="48dp"
-                app:sparkbutton_inActiveImage="@drawable/ic_heart_off"
-                app:sparkbutton_primaryColor="@color/heart_primary_color"
-                app:sparkbutton_secondaryColor="@color/heart_secondary_color" />
 
 
             <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
@@ -209,11 +225,12 @@
                 android:id="@+id/tvOverview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/open_sans"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/roboto"
                 android:paddingHorizontal="16dp"
                 android:paddingTop="16dp"
-                android:text="Overview:"
+                android:text="Overview"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -224,7 +241,7 @@
                 android:id="@+id/tvPlotsynopsis"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
+                android:fontFamily="@font/open_sans_light"
                 android:paddingHorizontal="16dp"
                 android:paddingBottom="16dp"
                 android:text="@{contentMovie.overview}"
@@ -238,10 +255,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:fontFamily="@font/open_sans"
+                android:layout_marginBottom="10dp"
+
+                android:fontFamily="@font/roboto"
                 android:paddingHorizontal="16dp"
                 android:paddingTop="16dp"
-                android:text="Genre:"
+                android:text="Genre"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -253,6 +272,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toLeftOf="parent"
+                app:chipBackgroundColor="@color/cblue1"
 
                 android:layout_marginStart="10dp"
                 android:paddingHorizontal="16dp"
@@ -279,9 +299,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:layout_weight="1"
-                    android:fontFamily="@font/open_sans"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/roboto"
                     android:gravity="start"
-                    android:text="Casts:"
+                    android:text="Casts"
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -292,6 +313,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|end"
                     android:layout_marginTop="4dp"
+                    android:visibility="gone"
                     android:layout_weight="1"
                     android:contentDescription='"Scroll Left"'
                     android:src="@drawable/ic_arrow_back"
@@ -304,8 +326,7 @@
                 android:id="@+id/rvCasts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="16dp"
+                 android:layout_marginBottom="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="16dp"
                 android:paddingEnd="16dp"
@@ -318,11 +339,12 @@
                 android:id="@+id/reviews"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/open_sans"
                 android:paddingHorizontal="16dp"
                 android:paddingTop="16dp"
-                android:text="Reviews:"
+                android:layout_marginBottom="10dp"
+                android:text="Reviews"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -333,8 +355,7 @@
                 android:id="@+id/rvReviews"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="16dp"
+                 android:layout_marginBottom="16dp"
                 android:paddingHorizontal="16dp"
                 android:paddingBottom="16dp"
                 android:textColor="@android:color/black"
@@ -344,7 +365,7 @@
 
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 </layout>

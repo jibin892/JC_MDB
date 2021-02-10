@@ -22,7 +22,7 @@
             <ImageView
                 android:id="@+id/ivMovieLarge"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="440dp"
                 android:fitsSystemWindows="true"
                 android:scaleType="fitXY"
                 app:imageUrl="@{`https://image.tmdb.org/t/p/w500`+ movie.posterPath}"

@@ -26,19 +26,20 @@
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content">
 
-            <ImageView
+            <com.mikhaellopez.circularimageview.CircularImageView
                 android:id="@+id/ivProfile"
-                android:layout_width="150dp"
-                android:layout_height="200dp"
+                android:layout_width="95dp"
+                android:layout_height="95dp"
                 android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:paddingHorizontal="4dp"
+                android:background="@drawable/user"
+                 android:paddingHorizontal="4dp"
+ app:civ_border_color="@color/cblue1"
+                app:civ_border="true"
+                app:civ_border_width="2dp"
                 bind:profileUrl="@{`https://image.tmdb.org/t/p/w500`+ cast.profilePath}"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:scaleType="fitCenter"
                 tools:ignore="contentDescription" />
 
             <TextView
@@ -73,6 +74,7 @@
                 android:paddingHorizontal="4dp"
                 android:gravity="center_horizontal"
                 android:paddingTop="4dp"
+                android:singleLine="true"
                 android:paddingBottom="4dp"
                 android:textColor="@android:color/black"
                 android:text="@{`Character: `+cast.character}"

@@ -237,15 +237,14 @@ public void onActivityResult(int requestCode, int resultCode, Intent data) {
     switch (requestCode) {
         case REQ_CODE: {
 
-load_search();
             if (resultCode == RESULT_OK && null != data) {
 
 
                 ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-
-                load_search();
-
-                 et_search.setQuery((result.get(0)), false);
+                String upperString = (result.get(0).substring(0, 1).toUpperCase() + (result.get(0)).substring(1).toLowerCase());
+                et_search.setQuery(upperString, false);
+                SearchUtil searchUtil = new SearchUtil(linearLayoutError, refreshButtonError, compositeDisposable, fragmentManager, MainActivity.this, progressBar, fetchFirstTimeDataService);
+                searchUtil.search(et_search);
 
 
             }
